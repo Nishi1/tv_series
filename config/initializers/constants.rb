@@ -1,0 +1,2 @@
+RECORD_PER_PAGE = 50
+

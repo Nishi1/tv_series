@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class=" search-box-header users-searchbox">
+          <form class="form-inline" method="get">
+            <div class="form-group">
+              <input type="search" class="form-control" id="search" placeholder="Search" name="search" value="<%=params[:search]%>">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+          </form>
+          <% if params[:search].present? && params[:search] != '' %>
+            <%= link_to tv_series_index_path, :class => 'btn btn-info' do %>
+                     <span class="fa fa-refresh"></span> &nbsp;Reset
+            <% end %>
+          <% end %>
+        </div>
+  <div>
+    <div>
+      <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">TV Series</th>
+      <th scope="col">Genre</th>
+      <th scope="col">No of seasons</th>
+      <th scope="col">Date of First Release</th>
+      <th scope="col">Director</th>
+      <th scope="col">Actor</th>
+      <th scope="col">locations</th>
+      <th scope="col">Ratings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tv_series.each do |ts| %>
+    <tr>      
+      <td><%= ts.serial %></td>
+      <td><%= ts.genre %></td>
+      <td><%= ts.no_of_seasons %></td>
+      <td><%= ts.first_release_date %></td>
+      <td><%= ts.director.name %></td>
+      <td><%= ts.tv_actors&.map(&:name)&.join(',') %></td>
+      <td><%= ts.shoot_locations&.map{|m| "#{m.location}-#{m.country}"}&.join(',') %></td>
+      <td><%= ts.average_rating %></td>      
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>
+    </div>
+    
+  </div>
+</div>
+
